@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+    <header class="intro-header" style="background-image: url({% static 'img/blog-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ article.title }}</h1>
+                        <h2 class="subheading">{{ article.intro }}</h2>
+                        <span class="meta">Posted by <a href="https://www.facebook.com/wisdom.amuzu.399/" target="_blank">Codekvng</a> on {{ article.pub_date }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <article>
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p>{{ article.content_p1 }}</p>
+                        <p>{{ article.content_p2 }}</p>
+                        <p>{{ article.content_p3 }}</p>
+                        <form action="{% url 'article' article.title %}" method="post">
+                            <div class="form-group">
+                                {% csrf_token %}
+                                <label for="comment">Leave a comment</label>
+                                <textarea name="comment" class="form-control" id="comment" rows="2" cols="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Comment</button>
+                        </form>
+                        <div class="conatainer">
+                            {% for comment in comments %}
+                                <h5>User</h5>
+                                <p class="comment">{{ comment }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </article>
+{% endblock %}

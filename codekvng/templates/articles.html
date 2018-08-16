@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+    <header class="intro-header" style="background-image: url({% static 'img/blog-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>A Blog By<a href="https://www.facebook.com/wisdom.amuzu.399/" target="_blank">Codekvng</a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-preview">
+                        {% for article in content %}
+                        <a href="{% url 'article' article.title %}">
+                            <h2 class="post-title">
+                                {{ article.title }}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{ article.intro }}
+                            </h3>
+                        </a>
+                        <p class="post-meta">Posted by <a href="https://www.facebook.com/wisdom.amuzu.399/" target="_blank">Codekvng</a> on {{ article.pub_date }}</p>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+{% endblock %}
